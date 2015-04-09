@@ -1,0 +1,161 @@
+.control-box {
+  position: fixed;
+  font-size: 20pt;
+  z-index: 9999999;
+  text-align: left;
+  font-family: verdana;
+  display: block;
+  opacity: 0.7;
+}
+
+.control-box.hide-origins {
+  bottom: 20px;
+  left: 20px;
+}
+
+.control-box.show-origins {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: black;
+}
+
+.control-box.closed {
+  display: none;
+}
+
+.control-box > .list-origins {
+  border-radius: 2px;
+  background-color: white;
+  border-collapse: collapse;
+  padding: 5px;
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+}
+
+.control-box.hide-origins > .list-origins {
+  display: none;
+}
+
+.control-box > .open-button {
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  background-color: white;
+  cursor: pointer;
+
+  border-radius: 2px;
+
+  padding: 6px;
+  display: block;
+  line-height: 20px;
+  font-size: 20px;
+}
+
+.control-box > .open-button > .status {
+  padding: 2px;
+  background-color: red;
+  color: white;
+  font-weight: 900;
+  font-size: 10px;
+  line-height: 15px;
+}
+
+.control-box > .open-button > .status.local {
+  color: darkgray;
+  background-color: white;
+  font-weight: 100;
+  font-size: 8px;
+  line-height: 12px;
+}
+
+.control-box > .open-button > .close-button {
+  position: relative;
+  top: -16px;
+  left: -16px;
+  color: red;
+  height: 0;
+  width: 0;
+  font-size: 16px;
+}
+
+.control-box.show-origins > .open-button {
+  display: none;
+}
+
+.control-box.show-origins > .list-origins > .origin > * {
+  border-top: 1px dotted darkgray;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.control-box.show-origins > .list-origins > .origin:first-child > * {
+  border-top: none;
+}
+
+.control-box > .list-origins > .origin > .name {
+  font-weight: 900;
+  padding: 4px 10px;
+}
+
+.control-box > .list-origins > .origin > .endpoint-key {
+  color: red;
+  padding: 4px 10px;
+}
+
+.control-box > .list-origins > .origin > .endpoint-key.local {
+  color: darkgray;
+}
+
+.control-box > .list-origins > .origin > .endpoints {
+  padding: 0 10px;
+}
+
+.control-box > .list-origins > .origin.hide-endpoints > .endpoints {
+  padding: 4px 0;
+}
+
+.control-box > .list-origins > .origin > .endpoint-key.selectable {
+  cursor: pointer;
+}
+
+.control-box > .list-origins > .origin > .endpoint-key.selectable:hover {
+  color: darkblue;
+  background-color: rgba(220, 220, 255, 0.5);
+}
+
+.control-box > .list-origins > .origin > .endpoint-key.selectable:active {
+  color: white;
+  background-color: rgba(155, 155, 255, 0.5);
+}
+
+.control-box > .list-origins > .origin > .endpoint-key.selectable:after {
+  margin-left: 5px;
+  content: "\25B8";
+}
+
+.control-box > .list-origins > .origin .endpoint > * {
+  cursor: pointer;
+}
+
+.control-box > .list-origins > .origin .endpoint > * {
+  border-top: 1px dotted darkgray;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.control-box > .list-origins > .origin .endpoint:first-child > * {
+  border-top: none;
+}
+
+.control-box > .list-origins > .origin .endpoint:hover > * {
+  background-color: rgba(220, 220, 255, 0.5);
+}
+
+.control-box > .list-origins > .origin .endpoint:active > * {
+  background-color: rgba(220, 220, 255, 0.5);
+}
+
+.control-box > .list-origins > .origin.hide-endpoints > .endpoints > .list-endpoints {
+  display: none;
+}

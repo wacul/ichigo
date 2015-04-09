@@ -1,0 +1,27 @@
+{
+    "version": "1.4.1",
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "declaration": false,
+        "noImplicitAny": false,
+        "removeComments": true,
+        "noLib": false
+    },
+    "filesGlob": [
+        "./**/*.ts",
+        "!./node_modules/**/*.ts"
+    ],
+    "files": [
+        "./api.ts",
+        "./button.ts",
+        "./control_box.ts",
+        "./endpoint_box.ts",
+        "./endpoints_box.ts",
+        "./event_dispatcher.ts",
+        "./init.ts",
+        "./origin_box.ts",
+        "./origins_box.ts",
+        "./status_box.ts"
+    ]
+}
