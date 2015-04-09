@@ -1,5 +1,9 @@
 package main
 
+//go:generate npm install
+//go:generate gulp scripts
+//go:generate go-bindata -ignore=\\.DS_Store -ignore=\\.#.* -o asset/asset.go  -pkg asset  -prefix front front/...
+
 import (
 	"io/ioutil"
 	"os"

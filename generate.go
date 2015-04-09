@@ -1,3 +1,0 @@
-package __generate
-
-//go:generate go-bindata -ignore=\\.DS_Store -ignore=\\.#.* -o asset/asset.go  -pkg asset  -prefix front front/...

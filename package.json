@@ -1,0 +1,21 @@
+{
+  "name": "ichigo",
+  "version": "1.0.0",
+  "description": "Reverse proxy for development",
+  "main": "gulpfile.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wacul/ichigo.git"
+  },
+  "author": "wacul",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wacul/ichigo/issues"
+  },
+  "homepage": "https://github.com/wacul/ichigo",
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-typescript": "^2.6.0",
+    "merge2": "^0.3.2"
+  }
+}

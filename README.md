@@ -5,13 +5,16 @@ Reverse proxy for development
 ## Install
 
 ```bash
-go get github.com/wacul/ichigo/cmd/ichigo
+go get github.com/wacul/ichigo
 ```
 
 ## Usage
 
 ```bash
-ichigo -c config.yaml
+ichigo [-c <file>|--config=<file>]
+
+# Options:
+#   -c <file>, --config=<file>    A file contains configurations (YAML). Default: config.yaml
 ```
 
 ## Sample config.yaml
@@ -48,4 +51,12 @@ behaviors:
   originKey: back
 - pathPrefix: /
   originKey: front
+```
+
+## Contribution
+
+```sh
+npm install gulp
+npm install
+go generate
 ```
