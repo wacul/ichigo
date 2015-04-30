@@ -7,8 +7,10 @@ package main
 import (
 	"io/ioutil"
 	"os"
+	"time"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/skratchdot/open-golang/open"
 	"github.com/wacul/ichigo/proxy"
 	"gopkg.in/alecthomas/kingpin.v1"
 	yaml "gopkg.in/yaml.v2"
@@ -40,5 +42,9 @@ func main() {
 		logrus.Fatalln(err.Error())
 	}
 
+	go func() {
+		time.Sleep(1 * time.Second)
+		open.Start("http://localhost" + handler.Addr)
+	}()
 	logrus.Println(handler.ListenAndServe())
 }
