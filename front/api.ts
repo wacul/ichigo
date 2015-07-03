@@ -28,42 +28,42 @@ interface Origin {
 
 class ProxyClient {
   private send(method: string, path: string, body: any): XMLHttpRequest {
-    var req = new XMLHttpRequest()
-    var url = window["entrypoint"]+path
-    req.open(method, url, true)
-    req.setRequestHeader("X-Proxy-Control", "1")
+    var req = new XMLHttpRequest();
+    var url = window["entrypoint"]+path;
+    req.open(method, url, true);
+    req.setRequestHeader("X-Proxy-Control", "1");
     if (body) {
-      req.send(body)
+      req.send(body);
     } else {
-      req.send()
+      req.send();
     }
-    return req
+    return req;
   }
   private req(method: string, path: string, body: any, done: DoneFunc, fail: FailFunc) {
-    var req = this.send(method, path, body)
+    var req = this.send(method, path, body);
     req.onload = function(e) {
       if (req.status / 100 > 3) {
-        fail(JSON.parse(req.response))
+        fail(JSON.parse(req.response));
       }
-      done(JSON.parse(req.response))
-    }
+      done(JSON.parse(req.response));
+    };
   }
 
   listOrigins(done: ListDoneFunc, fail: FailFunc){
-    var req = this.send("GET", "/origins", null)
+    var req = this.send("GET", "/origins", null);
     req.onload = function(e) {
       if (req.status / 100 > 3) {
-        fail(JSON.parse(req.response))
+        fail(JSON.parse(req.response));
       }
-      done(JSON.parse(req.response))
-    }
+      done(JSON.parse(req.response));
+    };
   }
 
   updateOrigin(originID: string, endpointKey: string, done: DoneFunc, fail: FailFunc) {
-    this.req("PATCH", "/origins/"+originID, JSON.stringify({ "endpointKey": endpointKey }), done, fail)
+    this.req("PATCH", "/origins/"+originID, JSON.stringify({ "endpointKey": endpointKey }), done, fail);
   }
 
   getOrigin(originID: string, done: DoneFunc, fail: FailFunc) {
-    this.req("GET", "/origins/"+originID, null, done, fail)
+    this.req("GET", "/origins/"+originID, null, done, fail);
   }
 }

@@ -1,45 +1,44 @@
 class StatusBox {
-  private element: HTMLElement
+  private element: HTMLElement;
   // private nameElement: HTMLElement
-  private keyElement: HTMLElement
+  private keyElement: HTMLElement;
 
-  private origin: Origin
+  private origin: Origin;
 
   constructor(origin: Origin){
-    this.element = document.createElement("div")
-    this.element.className = "status"
+    this.element = document.createElement("div");
+    this.element.className = "status";
 
     // this.nameElement = document.createElement("span")
     // this.nameElement.className = "name"
     // this.element.appendChild(this.nameElement)
     //
-    this.keyElement = document.createElement("span")
-    this.keyElement.className = "endpoint-key"
-    this.element.appendChild(this.keyElement)
+    this.keyElement = document.createElement("span");
+    this.keyElement.className = "endpoint-key";
+    this.element.appendChild(this.keyElement);
 
-    this.setOrigin(origin)
+    this.setOrigin(origin);
   }
 
   setOrigin(origin: Origin) {
     if (!origin) {
-      return
+      return;
     }
-    // this.nameElement.innerText = origin.name
 
-    this.keyElement.innerText = origin.name + ": " + origin.endpointKey
-    this.keyElement.title = origin.name + ": " + origin.endpointURL
-    this.element.className = "status "+origin.endpointKey
+    setText(this.keyElement, origin.name + ": " + origin.endpointKey);
+    this.keyElement.title = origin.name + ": " + origin.endpointURL;
+    this.element.className = "status "+origin.endpointKey;
 
-    this.origin = origin
+    this.origin = origin;
   }
 
   put(parent: HTMLElement){
-    parent.appendChild(this.element)
+    parent.appendChild(this.element);
   }
 
   delete() {
     if (this.element && this.element.parentNode){
-      this.element.parentNode.removeChild(this.element)
+      this.element.parentNode.removeChild(this.element);
     }
   }
 }

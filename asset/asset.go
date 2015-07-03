@@ -21,10 +21,13 @@ func bindata_read(data []byte, name string) ([]byte, error) {
 
 	var buf bytes.Buffer
 	_, err = io.Copy(&buf, gz)
-	gz.Close()
+	clErr := gz.Close()
 
 	if err != nil {
 		return nil, fmt.Errorf("Read %q: %v", name, err)
+	}
+	if clErr != nil {
+		return nil, err
 	}
 
 	return buf.Bytes(), nil
@@ -76,7 +79,7 @@ func api_js() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindata_file_info{name: "api.js", size: 1470, mode: os.FileMode(420), modTime: time.Unix(1428575296, 0)}
+	info := bindata_file_info{name: "api.js", size: 1470, mode: os.FileMode(420), modTime: time.Unix(1435905444, 0)}
 	a := &asset{bytes: bytes, info:  info}
 	return a, nil
 }
@@ -96,7 +99,7 @@ func api_ts() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindata_file_info{name: "api.ts", size: 1593, mode: os.FileMode(420), modTime: time.Unix(1428553272, 0)}
+	info := bindata_file_info{name: "api.ts", size: 1593, mode: os.FileMode(420), modTime: time.Unix(1429005731, 0)}
 	a := &asset{bytes: bytes, info:  info}
 	return a, nil
 }
@@ -116,7 +119,7 @@ func button_js() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindata_file_info{name: "button.js", size: 1892, mode: os.FileMode(420), modTime: time.Unix(1428575296, 0)}
+	info := bindata_file_info{name: "button.js", size: 1892, mode: os.FileMode(420), modTime: time.Unix(1435905444, 0)}
 	a := &asset{bytes: bytes, info:  info}
 	return a, nil
 }
@@ -136,7 +139,7 @@ func button_ts() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindata_file_info{name: "button.ts", size: 1675, mode: os.FileMode(420), modTime: time.Unix(1428555305, 0)}
+	info := bindata_file_info{name: "button.ts", size: 1675, mode: os.FileMode(420), modTime: time.Unix(1429005731, 0)}
 	a := &asset{bytes: bytes, info:  info}
 	return a, nil
 }
@@ -156,7 +159,7 @@ func control_box_js() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindata_file_info{name: "control_box.js", size: 2345, mode: os.FileMode(420), modTime: time.Unix(1428575296, 0)}
+	info := bindata_file_info{name: "control_box.js", size: 2345, mode: os.FileMode(420), modTime: time.Unix(1435905444, 0)}
 	a := &asset{bytes: bytes, info:  info}
 	return a, nil
 }
@@ -176,7 +179,7 @@ func control_box_ts() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindata_file_info{name: "control_box.ts", size: 1972, mode: os.FileMode(420), modTime: time.Unix(1428554806, 0)}
+	info := bindata_file_info{name: "control_box.ts", size: 1972, mode: os.FileMode(420), modTime: time.Unix(1429005731, 0)}
 	a := &asset{bytes: bytes, info:  info}
 	return a, nil
 }
@@ -196,7 +199,7 @@ func endpoint_box_js() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindata_file_info{name: "endpoint_box.js", size: 1954, mode: os.FileMode(420), modTime: time.Unix(1428575296, 0)}
+	info := bindata_file_info{name: "endpoint_box.js", size: 1954, mode: os.FileMode(420), modTime: time.Unix(1435905444, 0)}
 	a := &asset{bytes: bytes, info:  info}
 	return a, nil
 }
@@ -216,7 +219,7 @@ func endpoint_box_ts() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindata_file_info{name: "endpoint_box.ts", size: 1742, mode: os.FileMode(420), modTime: time.Unix(1428552595, 0)}
+	info := bindata_file_info{name: "endpoint_box.ts", size: 1742, mode: os.FileMode(420), modTime: time.Unix(1429005731, 0)}
 	a := &asset{bytes: bytes, info:  info}
 	return a, nil
 }
@@ -236,7 +239,7 @@ func endpoints_box_js() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindata_file_info{name: "endpoints_box.js", size: 1766, mode: os.FileMode(420), modTime: time.Unix(1428575296, 0)}
+	info := bindata_file_info{name: "endpoints_box.js", size: 1766, mode: os.FileMode(420), modTime: time.Unix(1435905444, 0)}
 	a := &asset{bytes: bytes, info:  info}
 	return a, nil
 }
@@ -256,7 +259,7 @@ func endpoints_box_ts() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindata_file_info{name: "endpoints_box.ts", size: 1469, mode: os.FileMode(420), modTime: time.Unix(1428552440, 0)}
+	info := bindata_file_info{name: "endpoints_box.ts", size: 1469, mode: os.FileMode(420), modTime: time.Unix(1429005731, 0)}
 	a := &asset{bytes: bytes, info:  info}
 	return a, nil
 }
@@ -276,7 +279,7 @@ func event_dispatcher_js() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindata_file_info{name: "event_dispatcher.js", size: 840, mode: os.FileMode(420), modTime: time.Unix(1428575296, 0)}
+	info := bindata_file_info{name: "event_dispatcher.js", size: 840, mode: os.FileMode(420), modTime: time.Unix(1435905444, 0)}
 	a := &asset{bytes: bytes, info:  info}
 	return a, nil
 }
@@ -296,7 +299,7 @@ func event_dispatcher_ts() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindata_file_info{name: "event_dispatcher.ts", size: 715, mode: os.FileMode(420), modTime: time.Unix(1428547162, 0)}
+	info := bindata_file_info{name: "event_dispatcher.ts", size: 715, mode: os.FileMode(420), modTime: time.Unix(1429005731, 0)}
 	a := &asset{bytes: bytes, info:  info}
 	return a, nil
 }
@@ -316,7 +319,7 @@ func init_js() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindata_file_info{name: "init.js", size: 647, mode: os.FileMode(420), modTime: time.Unix(1428575296, 0)}
+	info := bindata_file_info{name: "init.js", size: 647, mode: os.FileMode(420), modTime: time.Unix(1435905444, 0)}
 	a := &asset{bytes: bytes, info:  info}
 	return a, nil
 }
@@ -336,7 +339,7 @@ func init_ts() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindata_file_info{name: "init.ts", size: 637, mode: os.FileMode(420), modTime: time.Unix(1428553344, 0)}
+	info := bindata_file_info{name: "init.ts", size: 637, mode: os.FileMode(420), modTime: time.Unix(1429005731, 0)}
 	a := &asset{bytes: bytes, info:  info}
 	return a, nil
 }
@@ -356,7 +359,7 @@ func layout_css() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindata_file_info{name: "layout.css", size: 3147, mode: os.FileMode(420), modTime: time.Unix(1428558770, 0)}
+	info := bindata_file_info{name: "layout.css", size: 3147, mode: os.FileMode(420), modTime: time.Unix(1429005731, 0)}
 	a := &asset{bytes: bytes, info:  info}
 	return a, nil
 }
@@ -376,7 +379,7 @@ func origin_box_js() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindata_file_info{name: "origin_box.js", size: 2983, mode: os.FileMode(420), modTime: time.Unix(1428575296, 0)}
+	info := bindata_file_info{name: "origin_box.js", size: 2983, mode: os.FileMode(420), modTime: time.Unix(1435905444, 0)}
 	a := &asset{bytes: bytes, info:  info}
 	return a, nil
 }
@@ -396,7 +399,7 @@ func origin_box_ts() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindata_file_info{name: "origin_box.ts", size: 2689, mode: os.FileMode(420), modTime: time.Unix(1428552823, 0)}
+	info := bindata_file_info{name: "origin_box.ts", size: 2689, mode: os.FileMode(420), modTime: time.Unix(1429005731, 0)}
 	a := &asset{bytes: bytes, info:  info}
 	return a, nil
 }
@@ -416,7 +419,7 @@ func origins_box_js() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindata_file_info{name: "origins_box.js", size: 2008, mode: os.FileMode(420), modTime: time.Unix(1428575296, 0)}
+	info := bindata_file_info{name: "origins_box.js", size: 2008, mode: os.FileMode(420), modTime: time.Unix(1435905444, 0)}
 	a := &asset{bytes: bytes, info:  info}
 	return a, nil
 }
@@ -436,7 +439,7 @@ func origins_box_ts() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindata_file_info{name: "origins_box.ts", size: 1657, mode: os.FileMode(420), modTime: time.Unix(1428552913, 0)}
+	info := bindata_file_info{name: "origins_box.ts", size: 1657, mode: os.FileMode(420), modTime: time.Unix(1429005731, 0)}
 	a := &asset{bytes: bytes, info:  info}
 	return a, nil
 }
@@ -456,7 +459,7 @@ func status_box_js() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindata_file_info{name: "status_box.js", size: 1255, mode: os.FileMode(420), modTime: time.Unix(1428575296, 0)}
+	info := bindata_file_info{name: "status_box.js", size: 1255, mode: os.FileMode(420), modTime: time.Unix(1435905444, 0)}
 	a := &asset{bytes: bytes, info:  info}
 	return a, nil
 }
@@ -476,12 +479,12 @@ func status_box_ts() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindata_file_info{name: "status_box.ts", size: 1150, mode: os.FileMode(420), modTime: time.Unix(1428554359, 0)}
+	info := bindata_file_info{name: "status_box.ts", size: 1150, mode: os.FileMode(420), modTime: time.Unix(1429005731, 0)}
 	a := &asset{bytes: bytes, info:  info}
 	return a, nil
 }
 
-var _tsconfig_json = []byte("\x1f\x8b\x08\x00\x00\x09\x6e\x88\x00\xff\x7c\x90\xc1\x4a\xc4\x30\x10\x86\xef\xfb\x14\x6b\x8f\x8b\xa4\x2c\xe8\xc5\x9b\x78\x10\x41\xf0\x01\x44\x4a\xda\xce\xae\x23\xc9\x4c\xc8\x4c\x8b\x22\xfb\xee\xa6\xcd\xba\x76\xb7\xc5\x1c\xff\x6f\xbe\x3f\x99\x7c\xaf\xd6\xe9\x14\x3d\x44\x41\xa6\xe2\x6e\x5d\x6c\xcd\x8d\xd9\x16\xd7\x39\x6f\xd8\x07\x74\x10\x5f\x82\x26\x2c\x89\x67\x61\x84\x6a\xe3\x1e\x74\x70\x40\x6e\x8f\xc6\x08\x3c\xb7\x9d\x83\x01\x24\xdf\x33\x7d\xc8\x94\xb6\xd0\x38\x1b\xad\xe6\xfb\x76\xd6\x09\x4c\x28\xf1\x93\x0f\x0e\x1b\xd4\x7b\xfa\x5a\xe0\x11\x3c\xf7\xf0\x90\x7a\x81\x74\x78\x90\xc6\xee\xdc\x7f\xc6\xfa\xd7\x1b\xe3\xc3\x71\x97\x5d\x5a\x44\x1e\x1d\x0f\xf4\xf5\x4f\x30\xe5\x66\x53\x6e\x8c\x9e\xbd\xf1\xca\x94\xc4\x2d\x54\x79\x13\x39\x8d\x8c\x13\x6f\xd3\xc2\xcb\x32\x1b\xf0\xa2\xcb\x94\x75\xa7\xca\x34\x8b\x1b\x26\x8d\xec\xaa\x9a\x3f\x67\x0c\xa8\x0d\x8c\xa4\xff\x42\x59\xa6\x7d\xfa\x99\xaa\x45\x09\x56\x9b\x77\x88\xb3\x01\x24\xd4\x59\xc8\x11\xf7\x48\x8b\x85\x19\x2d\x5f\x26\x6a\xb5\x3b\xa1\xfc\x3d\xab\xc3\x4f\x00\x00\x00\xff\xff\x9c\xf6\x3f\x7c\x56\x02\x00\x00")
+var _tsconfig_json = []byte("\x1f\x8b\x08\x00\x00\x09\x6e\x88\x00\xff\x7c\x90\xc1\x4a\xc4\x30\x10\x86\xef\x7d\x8a\xb5\xc7\x22\x29\x0b\x7a\xf1\x26\x1e\x44\x10\x7c\x00\x91\x92\xb6\xb3\xeb\x48\x3a\x13\x32\xd3\xa2\xc8\xbe\xbb\x69\xb3\xae\xdd\x6d\x31\xc7\xff\x9b\xef\x4f\x26\xdf\xd9\x26\x9e\x7c\x80\x20\xc8\x94\xdf\x6d\xf2\xad\xb9\x31\xdb\xfc\x3a\xe5\x0d\x77\x1e\x1d\x84\x17\xaf\x11\x4b\xe4\x49\x98\xa0\xda\xb0\x07\x1d\x1d\x90\xdb\xa3\x31\x81\x8e\xdb\xde\xc1\x08\xa2\xdf\x31\x7d\xc8\x9c\xb6\xd0\x38\x1b\xac\xa6\xfb\x76\xd6\x09\xcc\x28\xf1\x53\xe7\x1d\x36\xa8\xf7\xf4\xb5\xc2\x03\x74\x3c\xc0\x43\xec\x05\xd2\xf1\x41\x1a\xfa\x73\xff\x19\xeb\x5f\x6f\x8a\x0f\xc7\x5d\x76\x71\x11\x79\x74\x3c\xd2\xd7\x3f\xc1\x94\x45\x51\x16\x46\xcf\xde\x78\x65\x4a\xe2\x16\xaa\xb4\x89\x9c\x46\xa6\x89\xb7\x79\xe1\x65\x99\xf5\x78\xd1\x65\xca\xba\x57\x65\x5a\xc4\x0d\x93\x06\x76\x55\xcd\x9f\x0b\x06\xd4\x7a\x46\xd2\x7f\xa1\xac\xd3\x21\xfe\x4c\xd5\xa2\x78\xab\xcd\x3b\x84\xc5\x00\x12\xea\x22\xe4\x80\x7b\xa4\xd5\xc2\x84\xd6\x2f\x13\xb5\xda\x9f\x50\xfa\x9e\xec\x90\xfd\x04\x00\x00\xff\xff\x0a\xe6\x12\xcb\x57\x02\x00\x00")
 
 func tsconfig_json_bytes() ([]byte, error) {
 	return bindata_read(
@@ -496,7 +499,7 @@ func tsconfig_json() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindata_file_info{name: "tsconfig.json", size: 598, mode: os.FileMode(420), modTime: time.Unix(1428553590, 0)}
+	info := bindata_file_info{name: "tsconfig.json", size: 599, mode: os.FileMode(420), modTime: time.Unix(1432533766, 0)}
 	a := &asset{bytes: bytes, info:  info}
 	return a, nil
 }
@@ -606,8 +609,8 @@ func AssetDir(name string) ([]string, error) {
 		return nil, fmt.Errorf("Asset %s not found", name)
 	}
 	rv := make([]string, 0, len(node.Children))
-	for name := range node.Children {
-		rv = append(rv, name)
+	for childName := range node.Children {
+		rv = append(rv, childName)
 	}
 	return rv, nil
 }

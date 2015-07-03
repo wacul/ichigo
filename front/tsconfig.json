@@ -13,6 +13,7 @@
         "!./node_modules/**/*.ts"
     ],
     "files": [
+        "./_common.ts",
         "./api.ts",
         "./button.ts",
         "./control_box.ts",
