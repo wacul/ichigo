@@ -43,9 +43,9 @@ class ProxyClient {
     var req = this.send(method, path, body);
     req.onload = function(e) {
       if (req.status / 100 > 3) {
-        fail(JSON.parse(req.response));
+        fail(JSON.parse(req.responseText));
       }
-      done(JSON.parse(req.response));
+      done(JSON.parse(req.responseText));
     };
   }
 
@@ -53,9 +53,9 @@ class ProxyClient {
     var req = this.send("GET", "/origins", null);
     req.onload = function(e) {
       if (req.status / 100 > 3) {
-        fail(JSON.parse(req.response));
+        fail(JSON.parse(req.responseText));
       }
-      done(JSON.parse(req.response));
+      done(JSON.parse(req.responseText));
     };
   }
 
