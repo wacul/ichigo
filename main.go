@@ -25,6 +25,8 @@ func main() {
 	app := kingpin.New("Ichigo", "Reverse proxy for development")
 	app.Version("1.0.0")
 	configFile := app.Flag("config", "A file contains configurations (YAML)").Short('c').Default(ConfigFile).ExistingFile()
+	dontOpen := app.Flag("no-browser", "Supresss to open browser automatically").Short('n').Default("false").Bool()
+
 	_, err := app.Parse(os.Args[1:])
 	if err != nil {
 		logrus.Fatalln(err.Error())
@@ -42,9 +44,11 @@ func main() {
 		logrus.Fatalln(err.Error())
 	}
 
-	go func() {
-		time.Sleep(1 * time.Second)
-		open.Start("http://localhost" + handler.Addr)
-	}()
+	if dontOpen == nil || !*dontOpen {
+		go func() {
+			time.Sleep(1 * time.Second)
+			open.Start("http://localhost" + handler.Addr)
+		}()
+	}
 	logrus.Println(handler.ListenAndServe())
 }
