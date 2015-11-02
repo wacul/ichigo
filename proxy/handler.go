@@ -19,10 +19,11 @@ import (
 
 // Handler : リバースプロキシ
 type Handler struct {
-	Origins   []*Origin  `json:"origins" yaml:"origins"`
-	Behaviors []Behavior `json:"behaviors" yaml:"behaviors"`
-	Addr      string     `json:"-" yaml:"addr"`
-	API       API        `json:"-" yaml:"api"`
+	Origins     []*Origin  `json:"origins" yaml:"origins"`
+	Behaviors   []Behavior `json:"behaviors" yaml:"behaviors"`
+	Addr        string     `json:"-" yaml:"addr"`
+	API         API        `json:"-" yaml:"api"`
+	HideControl bool       `json:"-" yaml:"hideControl"`
 
 	origins    map[string]*Origin
 	proxy      *httputil.ReverseProxy
@@ -200,7 +201,19 @@ func (h *Handler) serveProxy(w http.ResponseWriter, r *http.Request) {
 	} else {
 		// append controller
 		contentType := rec.Header().Get("Content-Type")
-		if contentType == "text/html" || strings.HasPrefix(contentType, "text/html;") {
+
+		var hideControl bool = false
+		if h.HideControl {
+			hideControl = true
+		} else if r.URL != nil {
+			if q := r.URL.Query(); q != nil {
+				if _, ok := q["__ichigo__hide__control"]; ok {
+					hideControl = true
+				}
+			}
+		}
+
+		if (contentType == "text/html" || strings.HasPrefix(contentType, "text/html;")) && !hideControl {
 			if encoding == "gzip" {
 				reader, err := gzip.NewReader(rec.Body)
 				if err == nil {
