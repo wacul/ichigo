@@ -260,7 +260,8 @@ func (h *Handler) director(request *http.Request) {
 				// URLを変更する
 				dst, err := url.Parse(origin.EndpointURL)
 				if err != nil {
-					logrus.Fatalln(err.Error())
+					logrus.Errorln(err.Error())
+					continue
 				}
 				url := *request.URL
 				url.Scheme = dst.Scheme
@@ -269,13 +270,15 @@ func (h *Handler) director(request *http.Request) {
 				// ヘッダの中身がBodyに含まれているとダメなので、Body部分だけのバッファに一旦落とす
 				buffer, err := ioutil.ReadAll(request.Body)
 				if err != nil {
-					logrus.Fatalln(err.Error())
+					logrus.Errorln(err.Error())
+					continue
 				}
 
 				// 新しいリクエストを組み立てる
 				req, err := http.NewRequest(request.Method, url.String(), bytes.NewBuffer(buffer))
 				if err != nil {
-					logrus.Fatalln(err.Error())
+					logrus.Errorln(err.Error())
+					continue
 				}
 				req.Header = request.Header
 				*request = *req
