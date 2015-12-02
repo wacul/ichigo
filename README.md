@@ -1,6 +1,7 @@
 # Ichigo
 
 Reverse proxy for development
+![](ichigo.png)
 
 ## Install
 
