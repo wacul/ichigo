@@ -19,11 +19,13 @@ import (
 
 // Handler : リバースプロキシ
 type Handler struct {
-	Origins     []*Origin  `json:"origins" yaml:"origins"`
-	Behaviors   []Behavior `json:"behaviors" yaml:"behaviors"`
-	Addr        string     `json:"-" yaml:"addr"`
-	API         API        `json:"-" yaml:"api"`
-	HideControl bool       `json:"-" yaml:"hideControl"`
+	Origins   []*Origin  `json:"origins" yaml:"origins"`
+	Behaviors []Behavior `json:"behaviors" yaml:"behaviors"`
+	Addr      string     `json:"-" yaml:"addr"`
+	API       API        `json:"-" yaml:"api"`
+
+	StartPath   string `json:"-" yaml:"startPath"`
+	HideControl bool   `json:"-" yaml:"hideControl"`
 
 	origins    map[string]*Origin
 	proxy      *httputil.ReverseProxy
