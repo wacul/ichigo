@@ -52,6 +52,7 @@ behaviors:
   originKey: back
 - pathPrefix: /
   originKey: front
+startPath: /index.html 
 ```
 
 ## Contribution
