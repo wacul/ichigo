@@ -22,6 +22,7 @@ type Handler struct {
 	Origins     []*Origin  `json:"origins" yaml:"origins"`
 	Behaviors   []Behavior `json:"behaviors" yaml:"behaviors"`
 	Addr        string     `json:"-" yaml:"addr"`
+	Path        string     `json:"-" yaml:"path"`
 	API         API        `json:"-" yaml:"api"`
 	HideControl bool       `json:"-" yaml:"hideControl"`
 

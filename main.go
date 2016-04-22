@@ -47,7 +47,7 @@ func main() {
 	if dontOpen == nil || !*dontOpen {
 		go func() {
 			time.Sleep(1 * time.Second)
-			open.Start("http://localhost" + handler.Addr)
+			open.Start("http://localhost" + handler.Addr + handler.Path)
 		}()
 	}
 	logrus.Println(handler.ListenAndServe())
