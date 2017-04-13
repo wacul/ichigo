@@ -204,7 +204,7 @@ func (h *Handler) serveProxy(w http.ResponseWriter, r *http.Request) {
 		// append controller
 		contentType := rec.Header().Get("Content-Type")
 
-		var hideControl bool = false
+		hideControl := false
 		if h.HideControl {
 			hideControl = true
 		} else if r.URL != nil {
@@ -260,9 +260,9 @@ func (h *Handler) director(request *http.Request) {
 			origin, ok := h.origins[b.OriginKey]
 			if ok {
 				// URLを変更する
-				dst, err := url.Parse(origin.EndpointURL)
-				if err != nil {
-					logrus.Errorln(err.Error())
+				dst, parseErr := url.Parse(origin.EndpointURL)
+				if parseErr != nil {
+					logrus.Errorln(parseErr.Error())
 					continue
 				}
 				url := *request.URL
@@ -270,12 +270,15 @@ func (h *Handler) director(request *http.Request) {
 				url.Host = dst.Host
 
 				// ヘッダの中身がBodyに含まれているとダメなので、Body部分だけのバッファに一旦落とす
-				buffer, err := ioutil.ReadAll(request.Body)
-				if err != nil {
-					logrus.Errorln(err.Error())
-					continue
+				var buffer []byte
+				if request.Body != nil {
+					buf, err := ioutil.ReadAll(request.Body)
+					if err != nil {
+						logrus.Errorln(err.Error())
+						continue
+					}
+					buffer = buf
 				}
-
 				// 新しいリクエストを組み立てる
 				req, err := http.NewRequest(request.Method, url.String(), bytes.NewBuffer(buffer))
 				if err != nil {
