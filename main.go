@@ -21,9 +21,11 @@ const (
 	ConfigFile = "ichigo.yaml"
 )
 
+var version = "1.0.1"
+
 func main() {
 	app := kingpin.New("Ichigo", "Reverse proxy for development")
-	app.Version("1.0.0")
+	app.Version("1.0.1")
 	configFile := app.Flag("config", "A file contains configurations (YAML)").Short('c').Default(ConfigFile).ExistingFile()
 	dontOpen := app.Flag("no-browser", "Supresss to open browser automatically").Short('n').Default("false").Bool()
 
