@@ -11,7 +11,7 @@ class Button {
 
     this.closeElement = document.createElement("div");
     this.closeElement.className = "close-button";
-    this.closeElement.appendChild(document.createTextNode("\u26D4"));
+    this.closeElement.appendChild(document.createTextNode("\u2716"));
     this.closeElement.addEventListener("click", this.close.bind(this));
     this.element.appendChild(this.closeElement);
 

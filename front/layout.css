@@ -1,19 +1,17 @@
-.control-box {
+.ichigo-controller-box {
   position: fixed;
-  font-size: 20pt;
   z-index: 9999999;
   text-align: left;
   font-family: verdana;
   display: block;
-  opacity: 0.7;
 }
 
-.control-box.hide-origins {
+.ichigo-controller-box.hide-origins {
   bottom: 20px;
   left: 20px;
 }
 
-.control-box.show-origins {
+.ichigo-controller-box.show-origins {
   top: 0;
   left: 0;
   right: 0;
@@ -21,141 +19,180 @@
   background-color: black;
 }
 
-.control-box.closed {
+.ichigo-controller-box.closed {
   display: none;
 }
 
-.control-box > .list-origins {
-  border-radius: 2px;
+.ichigo-controller-box > .list-origins {
+  border-radius: 1.98px;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.14),0 2px 10px 0 rgba(0,0,0,.1);
+
   background-color: white;
   border-collapse: collapse;
   padding: 5px;
+  font-size: 30px;
+  line-height: 45px;
   position: fixed;
   bottom: 20px;
   left: 20px;
 }
 
-.control-box.hide-origins > .list-origins {
+.ichigo-controller-box.hide-origins > .list-origins {
   display: none;
 }
 
-.control-box > .open-button {
-  box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+.ichigo-controller-box > .open-button {
+  position: relative;
+  border-radius: 1.98px;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.14),0 2px 10px 0 rgba(0,0,0,.1);
+
   background-color: white;
   cursor: pointer;
 
-  border-radius: 2px;
-
   padding: 6px;
   display: block;
-  line-height: 20px;
-  font-size: 20px;
+  line-height: 30px;
+  font-size: 30px;
 }
 
-.control-box > .open-button > .status {
+.ichigo-controller-box > .open-button > .status {
   padding: 2px;
   background-color: red;
   color: white;
   font-weight: 900;
-  font-size: 10px;
-  line-height: 15px;
+  line-height: 20px;
+  font-size: 15px;
+
+  transition-duration: .25s;
+  -moz-transition-duration: .25s;
+  -webkit-transition-duration: .25s;
+
+  transition-timing-function: ease-in-out;
+  -moz-transition-timing-function: ease-in-out;
+  -webkit-transition-timing-function: ease-in-out;
+
+  transition-property: font-size,line-height;
+  -moz-transition-property: font-size,line-height;
+  -webkit-transition-property: font-size,line-height;
 }
 
-.control-box > .open-button > .status.local {
+.ichigo-controller-box:hover > .open-button > .status {
+  font-size: 30px;
+  line-height: 45px;
+}
+
+.ichigo-controller-box > .open-button > .status.local {
   color: darkgray;
   background-color: white;
   font-weight: 100;
-  font-size: 8px;
-  line-height: 12px;
+  font-size: 15px;
+  line-height: 20px;
+
+  transition-duration: .25s;
+  -moz-transition-duration: .25s;
+  -webkit-transition-duration: .25s;
+
+  transition-timing-function: ease-in-out;
+  -moz-transition-timing-function: ease-in-out;
+  -webkit-transition-timing-function: ease-in-out;
+
+  transition-property: font-size,line-height;
+  -moz-transition-property: font-size,line-height;
+  -webkit-transition-property: font-size,line-height;
 }
 
-.control-box > .open-button > .close-button {
-  position: relative;
-  top: -16px;
-  left: -16px;
+.ichigo-controller-box:hover > .open-button > .status.local {
+  font-size: 30px;
+  line-height: 36px;
+}
+
+.ichigo-controller-box > .open-button > .close-button {
+  position: absolute;
+  bottom: -20px;
+  left: -20px;
   color: red;
-  height: 0;
-  width: 0;
-  font-size: 16px;
+  height: 30px;
+  width: 30px;
+  font-size: 28px;
 }
 
-.control-box.show-origins > .open-button {
+.ichigo-controller-box.show-origins > .open-button {
   display: none;
 }
 
-.control-box.show-origins > .list-origins > .origin > * {
+.ichigo-controller-box.show-origins > .list-origins > .origin > * {
   border-top: 1px dotted darkgray;
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-.control-box.show-origins > .list-origins > .origin:first-child > * {
+.ichigo-controller-box.show-origins > .list-origins > .origin:first-child > * {
   border-top: none;
 }
 
-.control-box > .list-origins > .origin > .name {
+.ichigo-controller-box > .list-origins > .origin > .name {
   font-weight: 900;
   padding: 4px 10px;
 }
 
-.control-box > .list-origins > .origin > .endpoint-key {
+.ichigo-controller-box > .list-origins > .origin > .endpoint-key {
   color: red;
   padding: 4px 10px;
 }
 
-.control-box > .list-origins > .origin > .endpoint-key.local {
+.ichigo-controller-box > .list-origins > .origin > .endpoint-key.local {
   color: darkgray;
 }
 
-.control-box > .list-origins > .origin > .endpoints {
+.ichigo-controller-box > .list-origins > .origin > .endpoints {
   padding: 0 10px;
 }
 
-.control-box > .list-origins > .origin.hide-endpoints > .endpoints {
+.ichigo-controller-box > .list-origins > .origin.hide-endpoints > .endpoints {
   padding: 4px 0;
 }
 
-.control-box > .list-origins > .origin > .endpoint-key.selectable {
+.ichigo-controller-box > .list-origins > .origin > .endpoint-key.selectable {
   cursor: pointer;
 }
 
-.control-box > .list-origins > .origin > .endpoint-key.selectable:hover {
+.ichigo-controller-box > .list-origins > .origin > .endpoint-key.selectable:hover {
   color: darkblue;
   background-color: rgba(220, 220, 255, 0.5);
 }
 
-.control-box > .list-origins > .origin > .endpoint-key.selectable:active {
+.ichigo-controller-box > .list-origins > .origin > .endpoint-key.selectable:active {
   color: white;
   background-color: rgba(155, 155, 255, 0.5);
 }
 
-.control-box > .list-origins > .origin > .endpoint-key.selectable:after {
+.ichigo-controller-box > .list-origins > .origin > .endpoint-key.selectable:after {
   margin-left: 5px;
   content: "\25B8";
 }
 
-.control-box > .list-origins > .origin .endpoint > * {
+.ichigo-controller-box > .list-origins > .origin .endpoint > * {
   cursor: pointer;
 }
 
-.control-box > .list-origins > .origin .endpoint > * {
+.ichigo-controller-box > .list-origins > .origin .endpoint > * {
   border-top: 1px dotted darkgray;
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-.control-box > .list-origins > .origin .endpoint:first-child > * {
+.ichigo-controller-box > .list-origins > .origin .endpoint:first-child > * {
   border-top: none;
 }
 
-.control-box > .list-origins > .origin .endpoint:hover > * {
+.ichigo-controller-box > .list-origins > .origin .endpoint:hover > * {
   background-color: rgba(220, 220, 255, 0.5);
 }
 
-.control-box > .list-origins > .origin .endpoint:active > * {
+.ichigo-controller-box > .list-origins > .origin .endpoint:active > * {
   background-color: rgba(220, 220, 255, 0.5);
 }
 
-.control-box > .list-origins > .origin.hide-endpoints > .endpoints > .list-endpoints {
+.ichigo-controller-box > .list-origins > .origin.hide-endpoints > .endpoints > .list-endpoints {
   display: none;
 }

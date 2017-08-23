@@ -8,7 +8,7 @@ class ControlBox {
 
   constructor(){
     this.element = document.createElement("div");
-    this.element.className = "control-box hide-origins";
+    this.element.className = "ichigo-controller-box hide-origins";
 
     this.originsBox = new OriginsBox();
     this.originsBox.addEventListener("selectEndpoint", this.selectEndpoint.bind(this));
@@ -42,21 +42,21 @@ class ControlBox {
   }
 
   showMenu(e: MouseEvent): any {
-    this.element.className = "control-box show-origins";
+    this.element.className = "ichigo-controller-box show-origins";
     e.preventDefault();
     e.stopPropagation();
     return false;
   }
 
   close(e: MouseEvent): any {
-    this.element.className = "control-box closed";
+    this.element.className = "ichigo-controller-box closed";
     e.preventDefault();
     e.stopPropagation();
     return false;
   }
 
   hideMenu(e: MouseEvent): any {
-    this.element.className = "control-box hide-origins";
+    this.element.className = "ichigo-controller-box hide-origins";
     e.preventDefault();
     e.stopPropagation();
     return false;
