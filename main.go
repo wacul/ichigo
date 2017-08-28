@@ -9,7 +9,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/Sirupsen/logrus"
+	"github.com/sirupsen/logrus"
 	"github.com/skratchdot/open-golang/open"
 	"github.com/wacul/ichigo/proxy"
 	kingpin "gopkg.in/alecthomas/kingpin.v2"
