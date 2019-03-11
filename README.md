@@ -10,6 +10,12 @@ Reverse proxy for development
 go get github.com/wacul/ichigo
 ```
 
+For Homebrew user:
+
+```bash
+brew install wacul/tap/ichigo
+```
+
 ## Usage
 
 ```bash
