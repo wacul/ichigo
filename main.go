@@ -21,7 +21,7 @@ const (
 	ConfigFile = "ichigo.yaml"
 )
 
-var version = "1.0.1"
+var version = "snapshot"
 
 func main() {
 	app := kingpin.New("Ichigo", "Reverse proxy for development")
