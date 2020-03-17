@@ -3,6 +3,16 @@ release:
   github:
     owner: wacul
     name: ichigo
+brew:
+  install: |
+    bin.install "ichigo"
+    man1.install "ichigo.1"
+  github:
+    owner: wacul
+    name: homebrew-tap
+  folder: Formula
+  homepage: https://github.com/wacul/ichigo
+  description: Reverse proxy for development
 builds:
 - goos:
   - linux
@@ -11,15 +21,14 @@ builds:
   goarch:
   - amd64
   - "386"
-  goarm:
-  - "6"
   main: .
   ldflags: -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}}
   binary: ichigo
+  hooks:
+    pre: make man
 archive:
   format: tar.gz
-  name_template: '{{ .Binary }}_{{.Version}}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{
-    .Arm }}{{ end }}'
+  name_template: "{{ .Binary }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
   files:
   - licence*
   - LICENCE*
@@ -29,5 +38,6 @@ archive:
   - README*
   - changelog*
   - CHANGELOG*
+  - ichigo.1
 snapshot:
   name_template: SNAPSHOT-{{ .Commit }}

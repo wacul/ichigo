@@ -1,12 +1,19 @@
-# Ichigo
+# ichigo
 
 Reverse proxy for development
+
 ![](ichigo.png)
 
 ## Install
 
 ```bash
 go get github.com/wacul/ichigo
+```
+
+For Homebrew user:
+
+```bash
+brew install wacul/tap/ichigo
 ```
 
 ## Usage
@@ -62,3 +69,9 @@ npm install gulp
 npm install
 go generate
 ```
+
+# LICENSE
+
+[![MIT License](http://img.shields.io/badge/license-MIT-blue.svg)](http://www.opensource.org/licenses/MIT)
+
+This is distributed under the [MIT License](http://www.opensource.org/licenses/MIT).

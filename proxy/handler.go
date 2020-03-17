@@ -95,14 +95,18 @@ func (h *Handler) controlHandler() http.Handler {
 
 func (h *Handler) serveAPIScript(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/javascript")
-	w.Write(h.apiScript)
+	if _, err := w.Write(h.apiScript); err != nil {
+		panic(err)
+	}
 	// script, _ := loadAPIScript(h.API.PathPrefix)
 	// w.Write(script)
 }
 
 func (h *Handler) serveAPIStyle(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/css")
-	w.Write(h.apiStyle)
+	if _, err := w.Write(h.apiStyle); err != nil {
+		panic(err)
+	}
 	// style, _ := loadAPIStyle()
 	// w.Write(style)
 }
@@ -129,15 +133,21 @@ func (h *Handler) getHTTPHandler(method func(r *http.Request) (interface{}, erro
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			message, _ := json.Marshal(map[string]string{"message": err.Error()})
-			w.Write(message)
+			if _, err := w.Write(message); err != nil {
+				panic(err)
+			}
 		} else if res != nil {
 			body, err := json.Marshal(res)
 			if err != nil {
 				w.WriteHeader(http.StatusBadRequest)
 				message, _ := json.Marshal(map[string]string{"message": err.Error()})
-				w.Write(message)
+				if _, err := w.Write(message); err != nil {
+					panic(err)
+				}
 			} else {
-				w.Write(body)
+				if _, err := w.Write(body); err != nil {
+					panic(err)
+				}
 			}
 		}
 	}

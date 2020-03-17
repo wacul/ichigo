@@ -21,11 +21,11 @@ const (
 	ConfigFile = "ichigo.yaml"
 )
 
-var version = "1.0.1"
+var version = "snapshot"
 
 func main() {
 	app := kingpin.New("Ichigo", "Reverse proxy for development")
-	app.Version("1.0.1")
+	app.Version(version)
 	configFile := app.Flag("config", "A file contains configurations (YAML)").Short('c').Default(ConfigFile).ExistingFile()
 	dontOpen := app.Flag("no-browser", "Supresss to open browser automatically").Short('n').Default("false").Bool()
 
@@ -49,7 +49,9 @@ func main() {
 	if dontOpen == nil || !*dontOpen {
 		go func() {
 			time.Sleep(1 * time.Second)
-			open.Start("http://localhost" + handler.Addr + handler.StartPath)
+			if err := open.Start("http://localhost" + handler.Addr + handler.StartPath); err != nil {
+				panic(err)
+			}
 		}()
 	}
 	logrus.Println(handler.ListenAndServe())
