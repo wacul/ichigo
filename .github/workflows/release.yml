@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check Branch
-        if: github.ref != 'refs/heads/maste'
+        if: github.ref != 'refs/heads/master'
         run: exit 1
       - name: Wait Tests
         id: test_result
