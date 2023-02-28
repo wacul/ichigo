@@ -11,12 +11,9 @@ builds:
       - amd64
       - arm64
       - "386"
-    main: ./cmd/ichigo
+    main: .
     binary: ichigo
     ldflags: -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}}
-    hooks:
-      post:
-        - go run -tags man -ldflags "-X=main.version={{.Version}} -X=main.commit={{.ShortCommit}} -X=main.date={{.Date}}" ./cmd/ichigo man
 archives:
   - id: gzip
     format: tar.gz
