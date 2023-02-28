@@ -1,43 +1,32 @@
+# yaml-language-server: $schema=https://goreleaser.com/static/schema.json
+
 project_name: ichigo
-release:
-  github:
-    owner: wacul
-    name: ichigo
-brew:
-  install: |
-    bin.install "ichigo"
-    man1.install "ichigo.1"
-  github:
-    owner: wacul
-    name: homebrew-tap
-  folder: Formula
-  homepage: https://github.com/wacul/ichigo
-  description: Reverse proxy for development
 builds:
-- goos:
-  - linux
-  - darwin
-  - windows
-  goarch:
-  - amd64
-  - "386"
-  main: .
-  ldflags: -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}}
-  binary: ichigo
-  hooks:
-    pre: make man
-archive:
-  format: tar.gz
-  name_template: "{{ .Binary }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
-  files:
-  - licence*
-  - LICENCE*
-  - license*
-  - LICENSE*
-  - readme*
-  - README*
-  - changelog*
-  - CHANGELOG*
-  - ichigo.1
-snapshot:
-  name_template: SNAPSHOT-{{ .Commit }}
+  - id: default
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+      - "386"
+    main: .
+    binary: ichigo
+    ldflags: -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}}
+archives:
+  - id: gzip
+    format: tar.gz
+    format_overrides:
+      - goos: windows
+        format: zip
+    files:
+      - licence*
+      - LICENCE*
+      - license*
+      - LICENSE*
+      - readme*
+      - README*
+      - changelog*
+      - CHANGELOG*
+      - ichigo*.1

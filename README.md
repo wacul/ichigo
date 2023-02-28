@@ -64,11 +64,21 @@ startPath: /index.html
 
 ## Contribution
 
+### Setup for dev
+
 ```sh
 npm install gulp
 npm install
 go generate
 ```
+
+### Release Cycle
+
+- Send pull-request if you needed
+- Owners merge it to default branch if it passes all tests
+- CI passed all tests and release tests
+- Owners Call `Release` action
+  - It tests codes, puts a new tag and make a release
 
 # LICENSE
 

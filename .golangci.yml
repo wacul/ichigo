@@ -1,4 +1,21 @@
 linters:
   enable:
+    - bodyclose
+    - depguard
+    - dogsled
+    - gocritic
+    - godox
+    - gofmt
+    - goimports
+    - golint
+    - misspell
+    - nakedret
+    - prealloc
+    - stylecheck
+    - unconvert
     - unparam
-    - scopelint
+    - whitespace
+linters-settings:
+  gocritic:
+    disabled-checks:
+      - elseif
