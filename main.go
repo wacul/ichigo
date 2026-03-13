@@ -1,7 +1,6 @@
 package main
 
 import (
-	"io/ioutil"
 	"os"
 	"time"
 
@@ -31,7 +30,7 @@ func main() {
 	}
 
 	logrus.SetLevel(logrus.DebugLevel)
-	confBytes, err := ioutil.ReadFile(*configFile)
+	confBytes, err := os.ReadFile(*configFile)
 	if err != nil {
 		logrus.Fatalln(err.Error())
 	}

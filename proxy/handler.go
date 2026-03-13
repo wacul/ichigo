@@ -5,7 +5,7 @@ import (
 	"compress/gzip"
 	"encoding/json"
 	"errors"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/http/httptest"
 	"net/http/httputil"
@@ -229,7 +229,7 @@ func (h *Handler) serveProxy(w http.ResponseWriter, r *http.Request) {
 			if encoding == "gzip" {
 				reader, err := gzip.NewReader(rec.Body)
 				if err == nil {
-					content, err = ioutil.ReadAll(reader)
+					content, err = io.ReadAll(reader)
 					if err == nil {
 						encoding = ""
 					} else {
@@ -282,7 +282,7 @@ func (h *Handler) director(request *http.Request) {
 				// ヘッダの中身がBodyに含まれているとダメなので、Body部分だけのバッファに一旦落とす
 				var buffer []byte
 				if request.Body != nil {
-					buf, err := ioutil.ReadAll(request.Body)
+					buf, err := io.ReadAll(request.Body)
 					if err != nil {
 						logrus.Errorln(err.Error())
 						continue
