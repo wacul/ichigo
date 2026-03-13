@@ -10,7 +10,7 @@ linters:
     - misspell
     - nakedret
     - prealloc
-    - stylecheck
+    - staticcheck
     - unconvert
     - unparam
     - whitespace
