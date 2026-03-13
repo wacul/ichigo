@@ -188,7 +188,32 @@ func (h *Handler) getOriginHTTPHandler(method func(origin *Origin, r *http.Reque
 	}
 }
 
+func hasHeaderToken(value, token string) bool {
+	for _, part := range strings.Split(value, ",") {
+		if strings.EqualFold(strings.TrimSpace(part), token) {
+			return true
+		}
+	}
+	return false
+}
+
+func isWebSocketUpgrade(r *http.Request) bool {
+	if r == nil {
+		return false
+	}
+	if !hasHeaderToken(r.Header.Get("Connection"), "upgrade") {
+		return false
+	}
+	return strings.EqualFold(strings.TrimSpace(r.Header.Get("Upgrade")), "websocket")
+}
+
 func (h *Handler) serveProxy(w http.ResponseWriter, r *http.Request) {
+	// WebSocket upgrade must keep the original writer for Hijacker support.
+	if isWebSocketUpgrade(r) {
+		h.proxy.ServeHTTP(w, r)
+		return
+	}
+
 	rec := httptest.NewRecorder()
 	h.proxy.ServeHTTP(rec, r)
 
