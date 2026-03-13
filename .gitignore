@@ -50,4 +50,3 @@ build/Release
 node_modules
 package-lock.json
 
-front/*.js
