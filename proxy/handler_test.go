@@ -8,8 +8,8 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"net/http/httputil"
-	"sync/atomic"
 	"strings"
+	"sync/atomic"
 	"testing"
 )
 
