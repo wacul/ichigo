@@ -1,3 +1,4 @@
+version: "2"
 linters:
   enable:
     - bodyclose
@@ -7,7 +8,7 @@ linters:
     - godox
     - gofmt
     - goimports
-    - golint
+    - revive
     - misspell
     - nakedret
     - prealloc
@@ -15,7 +16,7 @@ linters:
     - unconvert
     - unparam
     - whitespace
-linters-settings:
-  gocritic:
-    disabled-checks:
-      - elseif
+  settings:
+    gocritic:
+      disabled-checks:
+        - elseif
