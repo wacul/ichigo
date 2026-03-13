@@ -1,28 +1,24 @@
 {
-    "version": "1.4.1",
     "compilerOptions": {
         "target": "es5",
-        "module": "commonjs",
+        "module": "none",
         "declaration": false,
         "noImplicitAny": false,
         "removeComments": true,
-        "noLib": false
+        "noLib": false,
+        "outFile": "bundle.js"
     },
-    "filesGlob": [
-        "./**/*.ts",
-        "!./node_modules/**/*.ts"
-    ],
     "files": [
         "./_common.ts",
         "./api.ts",
-        "./button.ts",
-        "./control_box.ts",
+        "./event_dispatcher.ts",
+        "./status_box.ts",
         "./endpoint_box.ts",
         "./endpoints_box.ts",
-        "./event_dispatcher.ts",
-        "./init.ts",
         "./origin_box.ts",
         "./origins_box.ts",
-        "./status_box.ts"
+        "./button.ts",
+        "./control_box.ts",
+        "./init.ts"
     ]
 }

@@ -1,11 +1,6 @@
 package main
 
-//go:generate npm install
-//go:generate gulp scripts
-//go:generate go-bindata -ignore=\\.DS_Store -ignore=\\.#.* -o asset/asset.go  -pkg asset  -prefix front front/...
-
 import (
-	"io/ioutil"
 	"os"
 	"time"
 
@@ -35,7 +30,7 @@ func main() {
 	}
 
 	logrus.SetLevel(logrus.DebugLevel)
-	confBytes, err := ioutil.ReadFile(*configFile)
+	confBytes, err := os.ReadFile(*configFile)
 	if err != nil {
 		logrus.Fatalln(err.Error())
 	}

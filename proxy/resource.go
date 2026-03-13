@@ -3,8 +3,6 @@ package proxy
 import (
 	"fmt"
 	"strings"
-
-	"github.com/wacul/ichigo/asset"
 )
 
 const (
@@ -12,36 +10,39 @@ const (
 	scriptSuffix = "})();"
 )
 
-func loadAPIScript(entrypoint string) (script []byte, err error) {
-	script = []byte(fmt.Sprintf(scriptPrefix, entrypoint))
-	for _, name := range asset.AssetNames() {
-		if strings.HasSuffix(strings.ToLower(name), ".js") {
-			var source []byte
-			source, err := asset.Asset(name)
+func loadAPIScript(entrypoint string) ([]byte, error) {
+	script := []byte(fmt.Sprintf(scriptPrefix, entrypoint))
+	entries, err := assets.ReadDir("front")
+	if err != nil {
+		return nil, err
+	}
+	for _, e := range entries {
+		if strings.HasSuffix(strings.ToLower(e.Name()), ".js") {
+			src, err := assets.ReadFile("front/" + e.Name())
 			if err != nil {
 				return nil, err
 			}
-			if source != nil {
-				script = append(script, source...)
-			}
+			script = append(script, src...)
 		}
 	}
 	script = append(script, []byte(scriptSuffix)...)
-	return script, err
+	return script, nil
 }
 
-func loadAPIStyle() (style []byte, err error) {
-	for _, name := range asset.AssetNames() {
-		if strings.HasSuffix(strings.ToLower(name), ".css") {
-			var source []byte
-			source, err := asset.Asset(name)
+func loadAPIStyle() ([]byte, error) {
+	var style []byte
+	entries, err := assets.ReadDir("front")
+	if err != nil {
+		return nil, err
+	}
+	for _, e := range entries {
+		if strings.HasSuffix(strings.ToLower(e.Name()), ".css") {
+			src, err := assets.ReadFile("front/" + e.Name())
 			if err != nil {
 				return nil, err
 			}
-			if source != nil {
-				style = append(style, source...)
-			}
+			style = append(style, src...)
 		}
 	}
-	return style, err
+	return style, nil
 }

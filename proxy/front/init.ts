@@ -8,7 +8,7 @@ window.addEventListener("load", function(e){
       e["endpointKey"],
       function (origin: Origin) {
         box.setOrigin(origin);
-        location.reload(true);
+        location.reload();
       },
       function (err) {
         console.error(err);

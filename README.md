@@ -67,10 +67,11 @@ startPath: /index.html
 ### Setup for dev
 
 ```sh
-npm install gulp
 npm install
-go generate
+npm run build   # compile TypeScript → proxy/front/bundle.js
 ```
+
+> **Note:** Whenever you modify any `.ts` file under `proxy/front/`, re-run `npm run build` and commit the updated `proxy/front/bundle.js` together with your changes.
 
 ### Release Cycle
 

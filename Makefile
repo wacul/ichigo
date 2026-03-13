@@ -1,12 +1,9 @@
-.PHONY: gen lint test install man
+.PHONY: lint test install man
 
 VERSION := `git vertag get`
 COMMIT  := `git rev-parse HEAD`
 
-gen:
-	go generate ./...
-
-lint: gen
+lint:
 	golangci-lint run
 
 test: lint
