@@ -6,8 +6,6 @@ linters:
     - dogsled
     - gocritic
     - godox
-    - gofmt
-    - goimports
     - revive
     - misspell
     - nakedret
@@ -20,3 +18,7 @@ linters:
     gocritic:
       disabled-checks:
         - elseif
+formatters:
+  enable:
+    - gofmt
+    - goimports
