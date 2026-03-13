@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"net/http/httputil"
+	"sync/atomic"
 	"strings"
 	"testing"
 )
@@ -121,5 +122,112 @@ func TestServeProxy_InjectsControlAssetsOnHTML(t *testing.T) {
 	}
 	if !strings.Contains(text, `/_proxy/apiStyle.css`) {
 		t.Fatalf("style tag was not injected: %s", text)
+	}
+}
+
+func TestServeProxy_ConfigRoutesWebSocketToFrontLocal(t *testing.T) {
+	var backHits int32
+	back := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		atomic.AddInt32(&backHits, 1)
+		w.WriteHeader(http.StatusTeapot)
+	}))
+	defer back.Close()
+
+	var frontHits int32
+	var front *httptest.Server
+	front = httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		atomic.AddInt32(&frontHits, 1)
+		if r.Host != strings.TrimPrefix(front.URL, "http://") {
+			t.Fatalf("unexpected host at front: %q", r.Host)
+		}
+		if got, want := r.Header.Get("Origin"), front.URL; got != want {
+			t.Fatalf("unexpected origin at front: got %q want %q", got, want)
+		}
+		hijacker, ok := w.(http.Hijacker)
+		if !ok {
+			t.Fatalf("response writer does not support hijack")
+		}
+		conn, rw, err := hijacker.Hijack()
+		if err != nil {
+			t.Fatalf("hijack failed: %v", err)
+		}
+		defer conn.Close()
+		if _, err := rw.WriteString(
+			"HTTP/1.1 101 Switching Protocols\r\n" +
+				"Connection: Upgrade\r\n" +
+				"Upgrade: websocket\r\n" +
+				"\r\n",
+		); err != nil {
+			t.Fatalf("write handshake failed: %v", err)
+		}
+		if err := rw.Flush(); err != nil {
+			t.Fatalf("flush handshake failed: %v", err)
+		}
+	}))
+	defer front.Close()
+
+	handler := &Handler{
+		Origins: []*Origin{
+			{
+				Name: "back",
+				Endpoints: []Endpoint{
+					{Key: "develop", URL: back.URL},
+				},
+				EndpointKey: "develop",
+			},
+			{
+				Name: "front",
+				Endpoints: []Endpoint{
+					{Key: "local", URL: front.URL},
+				},
+				EndpointKey: "local",
+			},
+		},
+		Behaviors: []Behavior{
+			{PathPrefix: "/api/v1", OriginKey: "back"},
+			{PathPrefix: "/login", OriginKey: "back"},
+			{PathPrefix: "/", OriginKey: "front"},
+		},
+		API: API{PathPrefix: "/_proxy"},
+	}
+	handler.origins = map[string]*Origin{}
+	for _, o := range handler.Origins {
+		o.Init()
+		handler.origins[o.Name] = o
+	}
+	handler.proxy = &httputil.ReverseProxy{Director: handler.director}
+
+	proxyServer := httptest.NewServer(handler.controlHandler())
+	defer proxyServer.Close()
+
+	addr := strings.TrimPrefix(proxyServer.URL, "http://")
+	conn, err := net.Dial("tcp", addr)
+	if err != nil {
+		t.Fatalf("tcp dial failed: %v", err)
+	}
+	defer conn.Close()
+
+	req := fmt.Sprintf(
+		"GET /vite-hmr HTTP/1.1\r\nHost: %s\r\nConnection: keep-alive, Upgrade\r\nUpgrade: websocket\r\nOrigin: http://%s\r\nSec-WebSocket-Key: dGVzdA==\r\nSec-WebSocket-Version: 13\r\n\r\n",
+		addr,
+		addr,
+	)
+	if _, err := conn.Write([]byte(req)); err != nil {
+		t.Fatalf("write request failed: %v", err)
+	}
+
+	reader := bufio.NewReader(conn)
+	statusLine, err := reader.ReadString('\n')
+	if err != nil {
+		t.Fatalf("read status line failed: %v", err)
+	}
+	if !strings.Contains(statusLine, "101") {
+		t.Fatalf("unexpected status line: %q", statusLine)
+	}
+	if got := atomic.LoadInt32(&frontHits); got != 1 {
+		t.Fatalf("front server hit count = %d, want 1", got)
+	}
+	if got := atomic.LoadInt32(&backHits); got != 0 {
+		t.Fatalf("back server hit count = %d, want 0", got)
 	}
 }

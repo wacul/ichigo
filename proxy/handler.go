@@ -207,6 +207,37 @@ func isWebSocketUpgrade(r *http.Request) bool {
 	return strings.EqualFold(strings.TrimSpace(r.Header.Get("Upgrade")), "websocket")
 }
 
+func cloneHeader(src http.Header) http.Header {
+	dst := make(http.Header, len(src))
+	for k, vv := range src {
+		values := make([]string, len(vv))
+		copy(values, vv)
+		dst[k] = values
+	}
+	return dst
+}
+
+func rewriteWebSocketOriginHeader(req *http.Request, upstream *url.URL, proxyHost string) {
+	if req == nil || upstream == nil {
+		return
+	}
+	origin := strings.TrimSpace(req.Header.Get("Origin"))
+	if origin == "" {
+		return
+	}
+	originURL, err := url.Parse(origin)
+	if err != nil {
+		return
+	}
+	// Only rewrite same-host browser origin used against this proxy.
+	if !strings.EqualFold(originURL.Host, proxyHost) {
+		return
+	}
+	originURL.Scheme = upstream.Scheme
+	originURL.Host = upstream.Host
+	req.Header.Set("Origin", originURL.String())
+}
+
 func (h *Handler) serveProxy(w http.ResponseWriter, r *http.Request) {
 	// WebSocket upgrade must keep the original writer for Hijacker support.
 	if isWebSocketUpgrade(r) {
@@ -320,7 +351,11 @@ func (h *Handler) director(request *http.Request) {
 					logrus.Errorln(err.Error())
 					continue
 				}
-				req.Header = request.Header
+				req.Header = cloneHeader(request.Header)
+				req.Host = dst.Host
+				if isWebSocketUpgrade(req) {
+					rewriteWebSocketOriginHeader(req, dst, request.Host)
+				}
 				*request = *req
 				return
 			}
