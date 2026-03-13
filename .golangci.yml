@@ -5,7 +5,7 @@ linters:
     - dogsled
     - gocritic
     - godox
-#    - revive
+    # - revive
     - misspell
     - nakedret
     - prealloc
