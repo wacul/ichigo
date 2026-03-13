@@ -356,6 +356,8 @@ func (h *Handler) director(request *http.Request) {
 				if isWebSocketUpgrade(req) {
 					rewriteWebSocketOriginHeader(req, dst, request.Host)
 				}
+				// Preserve the original request context (cancellation, deadline, values)
+				req = req.WithContext(request.Context())
 				*request = *req
 				return
 			}
