@@ -22,5 +22,10 @@ formatters:
     - gofmt
     - goimports
 issues:
-  exclude-files:
-    - asset/asset.go
+  exclude-rules:
+    - path: asset/asset.go
+      linters:
+        - gocritic
+        - revive
+        - gofmt
+        - goimports
