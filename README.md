@@ -7,7 +7,7 @@ Reverse proxy for development
 ## Install
 
 ```bash
-go get github.com/wacul/ichigo
+go install github.com/wacul/ichigo@latest
 ```
 
 For Homebrew user:
